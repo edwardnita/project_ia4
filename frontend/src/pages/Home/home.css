@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Montserat-Medium'; /* The name of the font */
+    src: url('../../common/assets/Montserrat-Medium.ttf'); /* Path to the font file */
+    /* Add additional font properties if needed, like font-weight and font-style */
+  }
+
+  @font-face {
+    font-family: 'Montserat-Bold'; /* The name of the font */
+    src: url('../../common/assets/Montserrat-Bold.ttf'); /* Path to the font file */
+    /* Add additional font properties if needed, like font-weight and font-style */
+  }
+
+  @font-face {
+    font-family: 'Montserat-Light'; /* The name of the font */
+    src: url('../../common/assets/Montserrat-Light.ttf'); /* Path to the font file */
+    /* Add additional font properties if needed, like font-weight and font-style */
+  }
+
+  @font-face {
+    font-family: 'Montserat-Regular'; /* The name of the font */
+    src: url('../../common/assets/Montserrat-Light.ttf'); /* Path to the font file */
+    /* Add additional font properties if needed, like font-weight and font-style */
+  }
+
+.main-title{
+    font-family: 'Montserat-Medium';
+    font-size: 36px;
+    color: white;
+}
+.second-title {
+    font-family: 'Montserat-Bold';
+    font-size: 36px;
+    color: #B8FFB7;
+}
+
+.calitate {
+    font-family: 'Montserat-Light';
+    font-size: 15px;
+    color: white;
+}
+.locatie {
+    font-family: 'Montserat-Medium';
+    font-size: 14px;
+    color: white;
+}
+.pinpoint {
+    width: 6%;
+    
+}
