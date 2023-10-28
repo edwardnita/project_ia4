@@ -1,3 +1,4 @@
+#transforma locatia in coordonate
 import requests
 
 api_key = '09047bbead0c6a581c47bd8941a0b548'

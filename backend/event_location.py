@@ -41,6 +41,7 @@
 from googleapiclient.discovery import build
 from datetime import datetime, timedelta, timezone
 
+# locatia evenimentului
 # api_key_eu = 'AIzaSyDKtS7afYJTMUsmv_CXHbY_8C1Wyl7kLdk'
 api_key = 'AIzaSyAD1KCCoKf_NpcFpJ1Q0Y5AINHeMRgExpo'
 

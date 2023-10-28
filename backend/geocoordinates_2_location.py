@@ -1,3 +1,4 @@
+#transforma coordonatele in locatie
 from geopy.geocoders import Nominatim
 
 # calling the nominatim tool

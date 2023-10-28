@@ -1,3 +1,4 @@
+# date despre poluarea intr-o locatie primind coordonatele
 import requests
 import json
 
