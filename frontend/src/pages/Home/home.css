@@ -30,12 +30,12 @@
 
 .main-title {
   font-family: "Montserat-Medium";
-  font-size: 36px;
+  font-size: 32px;
   color: white;
 }
 .second-title {
   font-family: "Montserat-Bold";
-  font-size: 36px;
+  
   color: #b8ffb7;
 }
 
@@ -44,6 +44,13 @@
   font-size: 15px;
   color: white;
 }
+.calitate2 {
+  font-family: "Montserat-Medium";
+  color: white;
+  
+
+}
+
 .locatie {
   font-family: "Montserat-Medium";
   font-size: 14px;
@@ -112,3 +119,68 @@
   padding-right: 23px;
   
 }
+
+.titlu-turbat {
+
+  /* letter-spacing: 15px; */
+  color: #000203;
+  text-transform: uppercase;
+  /* text-align: center; */
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+  /* line-height: 0.7em; */
+  outline: none;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0%{
+  
+    color:  #454545;
+    box-shadow: none;
+  }
+  100% {
+  
+    color: #b8ffb7;
+    text-shadow: 0 0 50px #b8ffb7,
+                0 0 20px #015200,
+                0 0 40px #b8ffb7,
+                0 0 80px #b8ffb7,
+                0 0 160px #b8ffb7,
+  }
+}
+
+.check-box{
+  background-color: #454545;
+}
+
+input::placeholder {
+  color: white; /* Setează culoarea textului placeholder-ului la alb */
+  opacity: 1; /* Asigură-te că textul este vizibil */
+}
+
+
+.input-container {
+  display: flex;
+  background: #333; /* Culoarea fundalului */
+  border: 1px solid #666; /* Stilul chenarului */
+  border-radius: 4px;
+  align-items: center; /* Aliniază elementele pe axa verticală */
+  padding: 0 8px; /* Spațiere în interiorul containerului */
+}
+
+input {
+  border: none; /* Elimină chenarul din jurul inputului */
+  background: transparent; /* Background transparent pentru a afișa fundalul containerului */
+  padding: 8px;
+  color: white;
+}
+
+.search-icon {
+  color: white; /* Culoarea iconiței */
+  margin-right: 8px; /* Spațiere între icon și input */
+  cursor: pointer;
+}
+.culoare-buton{
+  background-color: green;
+}
+

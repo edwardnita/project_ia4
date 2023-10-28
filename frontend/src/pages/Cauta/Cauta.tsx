@@ -1,19 +1,22 @@
 import React from 'react';
 import Page from '../../common/components/Page/Page'
 import '../../index.css'
-import './home.css'
+import '../Home/home.css'
 import img2 from '../../common/assets/Pinpoint-white.png';
-import img3 from '../../common/assets/calendar.png';
-import Card from './components/Card';
-import { ICard } from '../../common/interfaces/card.interface';
+// import Map from './Map';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+
+
 import { IHome } from '../../common/interfaces/home.interface';
 
 
-export default function Home() {
+export default function Harta() {
 
     const homeInfo: IHome = {
-        user_name: "Andrei",
-        location_home: "Bd. Iuliu Maniu, Bucharest",
+        user_name: "Utilizator",
+        location_home: "Bucharest, Bd. Unirii",
         index_home: 3,
         cards: [
             {
@@ -40,20 +43,21 @@ export default function Home() {
             {
                 name: "Nume 3",
                 location: "Locație 3",
-                hour: "09:00",
+                hour: "10:00",
                 temperature: 25,
                 index: 4,
             },
             {
                 name: "Nume 3",
                 location: "Locație 3",
-                hour: "18:00",
+                hour: "10:00",
                 temperature: 25,
                 index: 5,
             }
         ],
     };
 
+    
     let colorClass = '';
     let text='';
 
@@ -74,52 +78,41 @@ export default function Home() {
         
        <div className='flex flex-col mt-7 items-center justify-center'>
             <div className="flex flex-row px-5 mb-11 items-center justify-center text-center "> 
-                <h1 className="text-2xl text-white main-title tracking-normal ">
-                    Salut,&nbsp; 
-                </h1>
-                <h1 className="text-3xl  second-title tracking-normal titlu-turbat ">
-                    {homeInfo.user_name}
+                
+                <h1 className="text-2xl  second-title tracking-normal">
+                    Vezi poluarea de oriunde
                 </h1>
             </div>
 
-        <div className='flex flex-col'>
-            <div className=' text-center justify-center calitate'>
-                <p className=''> Calitatea mediului în</p>
-            </div>
-            <div className='flex flex-row text-white items-center justify-center text-center'>
-                <img src={img2} className='pinpoint' alt="mama"></img> 
-                <p className='locatie tracking-wide' >&nbsp;Locație: {homeInfo.location_home}</p>
+        
 
-            </div>
-        </div>
+       
+         
+            <div className="mt-2 flex justify-center items-center w-5/6">
+                <div className="input-container">
+                <span className="search-icon">
+                    <FontAwesomeIcon icon={faSearch} />
+                </span>
 
-        <div className={`flex result items-center justify-center text-center mt-11 main-gradient ${colorClass}`}>
-            {text}
-        </div>
+                    <input
+                    
+                    type="text"
+                    className="flex-1 p-2 rounded-lg text-white norder-none"
+                    placeholder="Type a message..."
+                    style={{ outline: "none" }}
+                    />
+                </div>
+                <button className="text-white p-2 rounded-r-lg culoare-buton">Send</button>
+                </div>
 
-        <div className='flex flex-col mt-12 mb-10'>
-            <div className=' text-center justify-center calitate'>
-                <p className=''> Calitatea mediului astăzi</p>
-            </div>
-            <div className='flex flex-row text-white items-center justify-center text-center'>
-                <img src={img3} className='pinpoint' alt="mama"></img> 
-                <p className='locatie tracking-wide' >&nbsp; 28.10.2023</p>
 
-            </div>
-        </div>
+
+
+        
 
         <div className='flex flex-col w-5/6 mb-20  '>
 
-            {homeInfo.cards.map((card: ICard) => (
-              <Card
-                name={card.name}
-                location={card.location}
-                hour={card.hour}
-                temperature={card.temperature}
-                index={card.index}
-                
-              />
-            ))}
+            
 
 
 
