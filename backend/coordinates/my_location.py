@@ -10,6 +10,7 @@ def get_location():
     try:
         response = requests.get(ipstack_url)
         data = response.json()
+        print(data)
 
         if 'latitude' in data and 'longitude' in data:
             latitude = data['latitude']
@@ -24,8 +25,8 @@ def get_location():
     except Exception as e:
         print(f'Error: {e}')
 
-# Call the function with your ipstack API key
-get_location()
+# # Call the function with your ipstack API key
+# get_location()
 
 # import requests
 #
@@ -34,3 +35,4 @@ get_location()
 # response = requests.get(url)
 #
 # print(response.json())
+

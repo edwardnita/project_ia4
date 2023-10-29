@@ -65,7 +65,7 @@ def get_events_in_time_range(start_time, end_time):
         ).execute()
 
         events = events_result.get('items', [])
-
+        print(events)
         if events:
             for event in events:
                 location = event.get('location', 'Location not specified')

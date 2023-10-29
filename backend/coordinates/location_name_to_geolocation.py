@@ -24,7 +24,7 @@ api_url = "http://api.positionstack.com/v1/forward"
 # Define your API access key and query parameters
 params = {
     "access_key": "28cb994c15f9b6a59d1671a4d1e0461a",
-    "query": "Predeal"
+    "query": "Constanta"
 }
 
 # Send the GET request

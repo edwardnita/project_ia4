@@ -5,7 +5,7 @@ from geopy.geocoders import Nominatim
 geoLoc = Nominatim(user_agent="GetLoc")
 
 # passing the coordinates
-locname = geoLoc.reverse("44.274474, 25.528208")
+locname = geoLoc.reverse("44.43655014038086, 26.099349975585938")
 
 # printing the address/location name
 print(locname)
