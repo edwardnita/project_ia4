@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Harta from './pages/Harta/Harta';
 import Cauta from './pages/Cauta/Cauta';
 
+
 function App() {
   return (
     <div >

@@ -30,7 +30,7 @@
 
 .main-title {
   font-family: "Montserat-Medium";
-  font-size: 32px;
+  
   color: white;
 }
 .second-title {
@@ -56,9 +56,9 @@
   font-size: 14px;
   color: white;
 }
-.pinpoint {
-  width: 6%;
-}
+/* .pinpoint {
+  width: 3%;
+} */
 
 .result {
   font-size: 40px;

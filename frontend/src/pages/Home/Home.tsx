@@ -2,11 +2,13 @@ import React from 'react';
 import Page from '../../common/components/Page/Page'
 import '../../index.css'
 import './home.css'
-import img2 from '../../common/assets/Pinpoint-white.png';
-import img3 from '../../common/assets/calendar.png';
+
+
 import Card from './components/Card';
 import { ICard } from '../../common/interfaces/card.interface';
 import { IHome } from '../../common/interfaces/home.interface';
+import Salut from './components/Salut';
+import Status from './components/Status';
 
 
 export default function Home() {
@@ -14,7 +16,7 @@ export default function Home() {
     const homeInfo: IHome = {
         user_name: "Andrei",
         location_home: "Bd. Iuliu Maniu, Bucharest",
-        index_home: 3,
+        index_home: 1,
         cards: [
             {
                 name: "Nume 1",
@@ -58,10 +60,10 @@ export default function Home() {
     let text='';
 
   if (homeInfo.index_home === 4 || homeInfo.index_home  === 5) {
-    colorClass = 'bg-gradient-to-l from-green-500 to-green-8000';
+    colorClass = 'bg-gradient-to-l from-green-500 to-green-1000';
     text='EXCELENTA';
   } else if (homeInfo.index_home  === 3) {
-    colorClass = 'bg-gradient-to-l from-yellow-500';
+    colorClass = 'bg-gradient-to-l from-yellow-500 to-yellow-1000';
     text='MEDIE';
   } else if (homeInfo.index_home  === 1 || homeInfo.index_home === 2) {
     colorClass = 'bg-gradient-to-l from-red-500';
@@ -72,43 +74,27 @@ export default function Home() {
     return (
     <Page>
         
-       <div className='flex flex-col mt-7 items-center justify-center'>
-            <div className="flex flex-row px-5 mb-11 items-center justify-center text-center "> 
-                <h1 className="text-2xl text-white main-title tracking-normal ">
-                    Salut,&nbsp; 
-                </h1>
-                <h1 className="text-3xl  second-title tracking-normal titlu-turbat ">
-                    {homeInfo.user_name}
-                </h1>
-            </div>
-
-        <div className='flex flex-col'>
-            <div className=' text-center justify-center calitate'>
-                <p className=''> Calitatea mediului în</p>
-            </div>
-            <div className='flex flex-row text-white items-center justify-center text-center'>
-                <img src={img2} className='pinpoint' alt="mama"></img> 
-                <p className='locatie tracking-wide' >&nbsp;Locație: {homeInfo.location_home}</p>
+    <div className='flex flex-col mt-7 items-center justify-center lg:flex-row lg:justify-around  '>
+       
+       <div className='sm:mb-28'>
+            <div className='flex flex-col items-center justify-center'>
+                <Salut 
+                user_name={homeInfo.user_name}
+                location_home={homeInfo.location_home}
+                />
 
             </div>
-        </div>
-
-        <div className={`flex result items-center justify-center text-center mt-11 main-gradient ${colorClass}`}>
-            {text}
-        </div>
-
-        <div className='flex flex-col mt-12 mb-10'>
-            <div className=' text-center justify-center calitate'>
-                <p className=''> Calitatea mediului astăzi</p>
+            
+            <div className="w-full  flex flex-col items-center justify-center" >
+                <Status 
+                index_home={homeInfo.index_home} 
+                    />
             </div>
-            <div className='flex flex-row text-white items-center justify-center text-center'>
-                <img src={img3} className='pinpoint' alt="mama"></img> 
-                <p className='locatie tracking-wide' >&nbsp; 28.10.2023</p>
 
-            </div>
-        </div>
-
-        <div className='flex flex-col w-5/6 mb-20  '>
+       </div>
+            
+            
+        <div className='flex flex-col w-5/6 sm:w-1/2 mb-20 sm:mb-28 lg:w-1/3 '>
 
             {homeInfo.cards.map((card: ICard) => (
               <Card
@@ -121,14 +107,10 @@ export default function Home() {
               />
             ))}
 
-
-
-
-
         </div>
         
         
-        </div> 
+    </div> 
         
    </Page>
     );
