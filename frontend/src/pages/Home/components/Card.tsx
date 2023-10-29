@@ -13,6 +13,14 @@ interface PartenerItemProps {
 export default function Card(props: PartenerItemProps) {
   const { name, location, hour, temperature, index } = props;
 
+  function truncateText(text:string, maxLength:number) {
+    if (text.split(' ').length > maxLength) {
+      const words = text.split(' ');
+      return words.slice(0, maxLength).join(' ') + '...';
+    }
+    return text;
+  }
+
   // Definim o variabilă pentru a stoca clasa CSS în funcție de index
   let colorClass = '';
 
@@ -27,19 +35,19 @@ export default function Card(props: PartenerItemProps) {
   return (
     <div className={`flex flex-row justify-between div-gri text-white rounded-2xl mb-5 `}>
       <div className='flex flex-row items-center justify-center'>
-        <p className='text-lg ora'>{hour}</p>
+        <p className='text-lg ora'>{truncateText(hour, 1)}</p>
       </div>
 
       <div className='flex flex-col justify-center'>
-        <p className='text-left activitate'>&nbsp;{name}</p>
+        <p className='text-left activitate'>&nbsp;{truncateText(name, 1)}</p>
         <div className='flex flex-row items-center justify-center'>
-          <img src={img2} className='opac' />
-          <p className='event-locatie'>&nbsp;{location}</p>
+          <img src={img2} className='opac w-3' />
+          <p className='event-locatie text-xs'>&nbsp;{truncateText(location, 2)}</p>
         </div>
       </div>
 
       <div className='flex flex-row items-center justify-center'>
-        <p className='grade'>{temperature}°C</p>
+        <p className='grade'>{Math.round(temperature)}°C</p>
       </div>
 
       <div className={`flex flex-row items-center justify-center rating rounded-2xl ${colorClass}`}>
