@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Montserat'; /* The name of the font */
+    src: url('../../assets/Montserrat-ExtraBold.ttf'); /* Path to the font file */
+    /* Add additional font properties if needed, like font-weight and font-style */
+  }
+
+.page {
+    
+    background: rgb(25, 26, 28); /* Culoare de fundal de rezervă pentru browsere care nu acceptă gradient */
+    background: linear-gradient(337deg, rgba(25, 26, 28, 1) 0%, rgba(39, 29, 44, 1) 100%);
+    min-height: 100vh;  
+ 
+}
+
+.green {
+    color: #B8FFB7;
+    font-family: 'Montserat';
+    
+   
+}
+
+.wave{
+    color: white;
+    font-family: 'Montserat';
+    
+    
+}
+
+.side{
+    background-color: #2b2b2b;
+    position:fixed;
+    bottom: 0;
+    /* left: 0; */
+    /* right: 0; */
+    border-top: #B8FFB7 2px solid;
+    
+    
+}
