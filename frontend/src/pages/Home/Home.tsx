@@ -84,19 +84,6 @@ export default function Home() {
         });
     }, []);
 
-    let colorClass = '';
-    let text='';
-
-  if (homeInfo.index_home === 4 || homeInfo.index_home  === 5) {
-    colorClass = 'bg-gradient-to-l from-green-500 to-green-1000';
-    text='EXCELENTA';
-  } else if (homeInfo.index_home  === 3) {
-    colorClass = 'bg-gradient-to-l from-yellow-500 to-yellow-1000';
-    text='MEDIE';
-  } else if (homeInfo.index_home  === 1 || homeInfo.index_home === 2) {
-    colorClass = 'bg-gradient-to-l from-red-500';
-    text='SLABĂ';
-  }
 
 
     return (
@@ -104,7 +91,7 @@ export default function Home() {
         
     <div className='flex flex-col mt-7 items-center justify-center lg:flex-row lg:justify-around  '>
        
-       <div className='sm:mb-28'>
+       <div className='sm:mb-10'>
             <div className='flex flex-col items-center justify-center'>
                 <Salut 
                 user_name={homeInfo.user_name}

@@ -8,6 +8,7 @@ interface StatusInfoProps {
 
 export default function Status (props: StatusInfoProps) {
     const { index_home } = props;
+
     let colorClass = '';
     let text='';
 
@@ -23,8 +24,8 @@ export default function Status (props: StatusInfoProps) {
   }
 
     return (
-        <div className="w-full ">
-            <div className={`flex result items-center justify-center text-center mt-11 main-gradient  ${colorClass}`}>
+        <div className=" mt-10">
+            <div className={`flex result items-center justify-center text-center mt-11 main-gradient p-5   ${colorClass}`}>
             {text}
             </div>
 

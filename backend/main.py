@@ -117,7 +117,7 @@ try:
                 "location": location,
                 "hour": hour_and_minutes,
                 "temperature": event_temperature,
-                "index": event_index
+                "index": 6 - event_index
             }
             events_info.append(new_event_info)
     else:
@@ -172,11 +172,20 @@ headers = {
 response = requests.post(location_info_url, data=json.dumps(location_info_input), headers=headers)
 location_info_response_data = response.json()
 location_aqi = location_info_response_data["indexes"][0]["aqi"]
+location_index = 1
+if 50 < location_aqi < 101:
+    location_index = 2
+elif 100 < location_aqi < 201:
+    location_index = 3
+elif 200 < location_aqi < 301:
+    location_index = 4
+elif 300 < location_aqi:
+    location_index = 5
 
 homeInfo = {
     "user_name": "Eduard",
     "location_home": f"{city}, {country}",
-    "index_home": location_aqi,
+    "index_home": 6 - location_index,
     "cards": events_info
 }
 
@@ -187,10 +196,10 @@ def get_current_location():
     return homeInfo
 
 
-@app.route("/getInfoForCity", methods=["POST"])
+@app.route("/search", methods=["POST"])
 @cross_origin()
 def get_info_for_city():
-    frontend_input = request.get_json()["city_name"]
+    frontend_input = request.get_json()["message"]
 
     # Define your API access key and query parameters
     get_info_for_city_params = {
@@ -247,7 +256,7 @@ def get_info_for_city():
     elif 300 < city_aqi:
         city_index = 5
     return {
-        "index": city_index,
+        "index": 6 - city_index,
         "temperature": city_temperature
     }
 
