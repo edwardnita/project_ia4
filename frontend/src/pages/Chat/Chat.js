@@ -16,7 +16,7 @@ import { IChatRequest } from '../../common/interfaces/chattext.interface';
 
 export default function Chat() {
   const [messages, setMessages] = useState([
-    { text: "Hello! How can I assist you today?", isUser: false },
+    { text: "Bună! Cu ce te pot ajuta astâzi?", isUser: false },
   ]);
 
   const [input, setInput] = useState('');
@@ -69,14 +69,14 @@ export default function Chat() {
 
   return (
     <Page>
-      <div className='flex flex-col mt-15 lg:mt-10 items-center justify-center'>
+      <div className='flex flex-col mt-15 lg:mt-2 lg:mt-10 items-center justify-center'>
         <div className='flex flex-row px-5 mb-6 items-center justify-center text-center'>
           <h1 className='text-2xl  second-title tracking-normal'>
-            Intreaba asistentul tau
+            întreabă asistentul tău
           </h1>
         </div>
 
-        <div className='mt-2 mb-10 flex justify-center items-center w-5/6'>
+        <div className='mt-5 mb-10 flex justify-center items-center w-5/6'>
           <div className='input-container'>
             <span className='search-icon'>
               <FontAwesomeIcon icon={faSearch} />
@@ -103,7 +103,7 @@ export default function Chat() {
         <div>
       <div
         ref={messageContainerRef}
-        className="h-96 border border-black-500 p-2 rounded-lg overflow-y-auto "
+        className="h-96  border border-black-300 p-2 rounded-lg overflow-y-auto "
       >
         {messages.map((message, index) => (
           <div

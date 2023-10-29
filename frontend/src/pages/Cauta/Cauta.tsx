@@ -84,7 +84,7 @@ export default function Cauta() {
       //  setIsButtonDisabled(false);
       setIsMaliciousRequest(false);
         setButtonClickCount(0);
-      }, 30000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -154,7 +154,7 @@ export default function Cauta() {
                 )}
             </div>
         </div> }
-        {isMaliciousRequest && (<div>incearca din nou in 30 de secunde</div>)}
+        {isMaliciousRequest && (<div className='text-white'>incearca din nou in 30 de secunde</div>)}
       </div>
     </Page>
   );

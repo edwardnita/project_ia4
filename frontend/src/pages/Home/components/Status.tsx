@@ -1,5 +1,6 @@
 import img3 from '../../../common/assets/calendar.png';
 import '../home.css'
+import CurrentTime from './CurrentTime';
 
 interface StatusInfoProps {
     index_home: number;
@@ -35,7 +36,7 @@ export default function Status (props: StatusInfoProps) {
                 </div>
                 <div className='flex flex-row text-white items-center justify-center text-center'>
                     <img src={img3} className='w-3' alt="mama"></img> 
-                    <p className='locatie tracking-wide' >&nbsp; 28.10.2023</p>
+                    <p className='locatie tracking-wide flex flex-row' >&nbsp; <CurrentTime /></p>
 
                 </div>
             </div>

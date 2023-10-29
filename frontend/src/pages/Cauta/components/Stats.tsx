@@ -19,7 +19,15 @@ interface IStatsProps {
 
 export default function Stats(props : IStatsProps) {
     const {index,temperature,city_name} = props;
-    
+    let colorClass = '';
+
+  if (index === 4 || index === 5) {
+    colorClass = 'bg-gradient-to-r from-green-500';
+  } else if (index === 3) {
+    colorClass = 'bg-gradient-to-r from-yellow-500';
+  } else if (index === 1 || index === 2) {
+    colorClass = 'bg-gradient-to-r from-red-500';
+  }
 
 
     return (
@@ -30,7 +38,7 @@ export default function Stats(props : IStatsProps) {
                         <p className='text-white tx1'>&nbsp;{city_name}</p>
                     
                     </div>
-                    <div className="w-2/5 bg-red-200 rounded-lg p-4 text-white bg2 flex flex-col justify-center items-center">
+                    <div className={`w-2/5 bg-red-200 rounded-lg p-4 text-white  flex flex-col justify-center items-center ${colorClass}`}>
                         {/* {polen_code} */}
                         <p className='tx1'>Calitate</p>
                         <p className='tx2 text-2xl flex flex-row'>{index}/5</p>

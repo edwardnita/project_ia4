@@ -39,7 +39,7 @@ export default function Card(props: PartenerItemProps) {
       </div>
 
       <div className='flex flex-col justify-center'>
-        <p className='text-left activitate'>&nbsp;{truncateText(name, 2)}</p>
+        <p className='text-left activitate'>&nbsp;{truncateText(name, 3)}</p>
         <div className='flex flex-row items-center justify-center'>
           <img src={img2} className='opac w-3' />
           <p className='event-locatie text-xs'>&nbsp;{truncateText(location, 2)}</p>
