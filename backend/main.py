@@ -97,17 +97,27 @@ try:
             event_url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={google_maps_api_key}'
             event_aqi_response = requests.post(event_url, data=json.dumps(event_data), headers=event_headers)
             event_aqi = event_aqi_response.json()["indexes"][0]["aqi"]
-
+            event_index = 1
+            if 50 < event_aqi < 101:
+                event_index = 2
+            elif 100 < event_aqi < 201:
+                event_index = 3
+            elif 200 < event_aqi < 301:
+                event_index = 4
+            elif 300 < event_aqi:
+                event_index = 5
             get_temperature_api_key = '09047bbead0c6a581c47bd8941a0b548'
             get_temperature_url = f'https://api.openweathermap.org/data/2.5/weather?lat={event_lat}&lon={event_lon}&appid={get_temperature_api_key}'
             get_temperature_response = requests.get(get_temperature_url)
             event_temperature = get_temperature_response.json()["main"]["temp"] - 273
+            hour_and_minutes_object = datetime.fromisoformat(start_time[:-1])
+            hour_and_minutes = f"{hour_and_minutes_object.hour}:{hour_and_minutes_object.minute}"
             new_event_info = {
                 "name": event['summary'],
                 "location": location,
-                "hour": start_time,
+                "hour": hour_and_minutes,
                 "temperature": event_temperature,
-                "index": event_aqi
+                "index": event_index
             }
             events_info.append(new_event_info)
     else:
@@ -171,7 +181,7 @@ homeInfo = {
 }
 
 
-@app.route("/currentLocation", methods=["GET"])
+@app.route("/home", methods=["GET"])
 @cross_origin()
 def get_current_location():
     return homeInfo
@@ -227,8 +237,17 @@ def get_info_for_city():
 
     get_city_aqi_response = requests.post(get_city_aqi_url, data=json.dumps(get_city_aqi_data), headers=get_city_aqi_headers)
     city_aqi = get_city_aqi_response.json()["indexes"][0]["aqi"]
+    city_index = 1
+    if 50 < city_aqi < 101:
+        city_index = 2
+    elif 100 < city_aqi < 201:
+        city_index = 3
+    elif 200 < city_aqi < 301:
+        city_index = 4
+    elif 300 < city_aqi:
+        city_index = 5
     return {
-        "index": city_aqi,
+        "index": city_index,
         "temperature": city_temperature
     }
 
