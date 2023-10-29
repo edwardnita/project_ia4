@@ -14,50 +14,7 @@ import { getHome } from '../../common/services/api/home';
 
 export default function Home() {
 
-    // const homeInfo: IHome = {
-    //     user_name: "Andrei",
-    //     location_home: "Bd. Iuliu Maniu, Bucharest",
-    //     index_home: 1,
-    //     cards: [
-    //         {
-    //             name: "Nume 1",
-    //             location: "Locație 1",
-    //             hour: "08:00",
-    //             temperature: 23,
-    //             index: 1,
-    //         },
-    //         {
-    //             name: "Nume 2",
-    //             location: "Locație 2",
-    //             hour: "09:00",
-    //             temperature: 24,
-    //             index: 2,
-    //         },
-    //         {
-    //             name: "Nume 3",
-    //             location: "Locație 3",
-    //             hour: "10:00",
-    //             temperature: 25,
-    //             index: 3,
-    //         },
-    //         {
-    //             name: "Nume 3",
-    //             location: "Locație 3",
-    //             hour: "09:00",
-    //             temperature: 25,
-    //             index: 4,
-    //         },
-    //         {
-    //             name: "Nume 3",
-    //             location: "Locație 3",
-    //             hour: "18:00",
-    //             temperature: 25,
-    //             index: 5,
-    //         }
-    //     ],
-    // };
-
-    // const [cards, setCards] = useState<ICard[]>([]);
+   
     const [homeInfo, setHomeInfo] = useState<IHome>({
         user_name: '',
         location_home: '',

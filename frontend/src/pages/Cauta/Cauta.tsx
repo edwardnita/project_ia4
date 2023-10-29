@@ -9,6 +9,8 @@ import { IHome } from '../../common/interfaces/home.interface';
 import { postSearch } from '../../common/services/api/cauta';
 import Stats from './components/Stats'; 
 import { ISearch } from '../../common/interfaces/cauta.interface';
+import { IGetData } from '../../common/interfaces/getData.interface';
+import '../Cauta/components/styles.css'
 
 export default function Cauta() {
   const [input, setInput] = useState('');
@@ -19,8 +21,11 @@ export default function Cauta() {
   const [messageSent, setMessageSent] = useState(false);
   const [isMaliciousRequest, setIsMaliciousRequest] = useState(false);
 
-  const [searchInfo, setSearchInfo] = useState<ISearch>({
-    message: '',
+  const [searchInfo, setSearchInfo] = useState<IGetData>({
+    index: 0,
+    temperature: 0,
+    city_name: '',
+    // polen_code: 0,
 });
 
   const handleSubmit = async () => {
@@ -87,14 +92,14 @@ export default function Cauta() {
 
   return (
     <Page>
-      <div className='flex flex-col mt-7 items-center justify-center'>
+      <div className='flex flex-col mt-28 lg:mt-10 items-center justify-center'>
         <div className='flex flex-row px-5 mb-11 items-center justify-center text-center'>
           <h1 className='text-2xl  second-title tracking-normal'>
             Vezi poluarea de oriunde
           </h1>
         </div>
 
-        <div className='mt-2 flex justify-center items-center w-5/6'>
+        <div className='mt-2 mb-10 flex justify-center items-center w-5/6'>
           <div className='input-container'>
             <span className='search-icon'>
               <FontAwesomeIcon icon={faSearch} />
@@ -118,14 +123,32 @@ export default function Cauta() {
           </button>
         </div>
 {messageSent &&
-        <div className='flex flex-col w-5/6 mb-20'>
+        <div className='flex flex-col w-5/6 lg:w-1/2 mb-20'>
             <div>
                 {isError ?( <div>
                     <p className='text-red-500 text-center'>Eroare la trimiterea mesajului</p>
                 </div>) :(
                     <div>
-                        <p className='text-green-500 text-center'>Mesajul a fost trimis cu succes</p>
-                        <Stats />
+                        
+                        {!isLoading ? (<div>
+                                <Stats 
+                            index={searchInfo.index}
+                            temperature={searchInfo.temperature}
+                            city_name={searchInfo.city_name}
+                            // polen_code={searchInfo.polen_code}
+                            />
+                            
+                            
+                            </div>) : (
+                              
+                              <div key="31431" className="mb-2 ">
+                                <span className="flex flex-row justify-center items-center rounded-lg inline-block ">
+                                  <div className="loading-circle w-3"></div> {/* Cercul de încărcare */}
+                                </span>
+                              </div>
+                            
+                             )}
+                        
                     </div>
                     
                 )}

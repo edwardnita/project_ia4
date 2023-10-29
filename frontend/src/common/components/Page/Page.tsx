@@ -21,7 +21,7 @@ export default function Page({ children }: IPageProps) {
     { icon: faHome, label: 'acasa' },
     { icon: faMap, label: 'harta' },
     { icon: faSearch, label: 'Cauta' },
-    { icon: faHamburger, label: 'Stats' }
+    { icon: faHamburger, label: 'chat' }
     
   ];
 

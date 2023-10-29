@@ -35,11 +35,11 @@ export default function Card(props: PartenerItemProps) {
   return (
     <div className={`flex flex-row justify-between div-gri text-white rounded-2xl mb-5 `}>
       <div className='flex flex-row items-center justify-center'>
-        <p className='text-lg ora'>{truncateText(hour, 1)}</p>
+        <p className='text-md ora'>{truncateText(hour, 1)}</p>
       </div>
 
       <div className='flex flex-col justify-center'>
-        <p className='text-left activitate'>&nbsp;{truncateText(name, 1)}</p>
+        <p className='text-left activitate'>&nbsp;{truncateText(name, 2)}</p>
         <div className='flex flex-row items-center justify-center'>
           <img src={img2} className='opac w-3' />
           <p className='event-locatie text-xs'>&nbsp;{truncateText(location, 2)}</p>

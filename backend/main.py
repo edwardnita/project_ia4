@@ -37,21 +37,21 @@ try:
 except Exception as e:
     print(f'Error: {e}')
 
-google_maps_api_key = 'AIzaSyAD1KCCoKf_NpcFpJ1Q0Y5AINHeMRgExpo'
+google_maps_api_key = 'AIzaSyBldDYok7bcrTFcndz-M97OrKS1jJE4e1I'
 
 start_time = datetime.utcnow()
 end_time = start_time + timedelta(days=7)
 
 calendar_id = 'radualaur09022003@gmail.com'  # 'primary' is the default calendar ID for the user's primary calendar
 
-    # Build the Google Calendar API service
+# Build the Google Calendar API service
 service = build('calendar', 'v3', developerKey=google_maps_api_key)
 
 events = []
 events_info = []
 
 try:
-        # List events within the specified time range
+    # List events within the specified time range
     events_result = service.events().list(
         calendarId=calendar_id,
         timeMin=start_time.isoformat() + 'Z',
@@ -111,7 +111,10 @@ try:
             get_temperature_response = requests.get(get_temperature_url)
             event_temperature = get_temperature_response.json()["main"]["temp"] - 273
             hour_and_minutes_object = datetime.fromisoformat(start_time[:-1])
-            hour_and_minutes = f"{hour_and_minutes_object.hour}:{hour_and_minutes_object.minute}"
+            minute = hour_and_minutes_object.minute
+            if minute < 10:
+                minute = f"0{minute}"
+            hour_and_minutes = f"{hour_and_minutes_object.hour}:{minute}"
             new_event_info = {
                 "name": event['summary'],
                 "location": location,
@@ -173,13 +176,13 @@ response = requests.post(location_info_url, data=json.dumps(location_info_input)
 location_info_response_data = response.json()
 location_aqi = location_info_response_data["indexes"][0]["aqi"]
 location_index = 1
-if 50 < location_aqi < 101:
+if 70 < location_aqi < 91:
     location_index = 2
-elif 100 < location_aqi < 201:
+elif 90 < location_aqi < 131:
     location_index = 3
-elif 200 < location_aqi < 301:
+elif 130 < location_aqi < 201:
     location_index = 4
-elif 300 < location_aqi:
+elif 200 < location_aqi:
     location_index = 5
 
 homeInfo = {
@@ -188,6 +191,35 @@ homeInfo = {
     "index_home": 6 - location_index,
     "cards": events_info
 }
+
+
+def generate(prompt):
+    if prompt.__contains__("plimbare"):
+        return "plimbare"
+    elif prompt.__contains__("mamaie"):
+        return "mers la tara"
+    elif prompt.__contains__("fotbal"):
+        return "fotbal"
+
+
+def timestamp_to_hour_and_minutes(timestamp):
+    dt_object = datetime.fromtimestamp(timestamp)
+    idk_hour_and_minutes = str(dt_object)[11:16]
+    return idk_hour_and_minutes
+
+
+def cel_mai_mic_indice_la_ora(vector):
+    cel_mai_mic_indice = 6
+    ora_oportuna = "12:00"
+
+    # Parcurgem perechile de la ora specificată
+    for pereche in vector:
+        # Dacă nu avem încă o pereche sau indicele curent este mai mic decât cel mai mic indice găsit până acum
+        if pereche[1] < cel_mai_mic_indice:
+            cel_mai_mic_indice = pereche[1]
+            ora_oportuna = pereche[0]
+
+    return (ora_oportuna, cel_mai_mic_indice)
 
 
 @app.route("/home", methods=["GET"])
@@ -221,7 +253,7 @@ def get_info_for_city():
     weather_response = requests.get(weather_url)
     city_temperature = weather_response.json()["main"]["temp"] - 273
 
-    get_city_aqi_api_key = 'AIzaSyAD1KCCoKf_NpcFpJ1Q0Y5AINHeMRgExpo'
+    get_city_aqi_api_key = 'AIzaSyBldDYok7bcrTFcndz-M97OrKS1jJE4e1I'
     get_city_aqi_url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={get_city_aqi_api_key}'
 
     get_city_aqi_data = {
@@ -244,21 +276,63 @@ def get_info_for_city():
         'Content-Type': 'application/json'
     }
 
-    get_city_aqi_response = requests.post(get_city_aqi_url, data=json.dumps(get_city_aqi_data), headers=get_city_aqi_headers)
+    get_city_aqi_response = requests.post(get_city_aqi_url, data=json.dumps(get_city_aqi_data),
+                                          headers=get_city_aqi_headers)
     city_aqi = get_city_aqi_response.json()["indexes"][0]["aqi"]
     city_index = 1
-    if 50 < city_aqi < 101:
+
+    if 70 < city_aqi < 91:
         city_index = 2
-    elif 100 < city_aqi < 201:
+    elif 90 < city_aqi < 131:
         city_index = 3
-    elif 200 < city_aqi < 301:
+    elif 130 < city_aqi < 201:
         city_index = 4
-    elif 300 < city_aqi:
+    elif 200 < city_aqi:
         city_index = 5
+
     return {
         "index": 6 - city_index,
-        "temperature": city_temperature
+        "temperature": city_temperature,
+        "city_name": frontend_input
     }
+
+
+@app.route("/chat", methods=["POST"])
+@cross_origin()
+def get_optimal_hour():
+    frontend_input = request.get_json()["message"]
+    activity = generate(frontend_input)
+    for calendar_event in events_info:
+        if calendar_event["name"] == activity:
+            calendar_loc_to_geo_api_url = "http://api.positionstack.com/v1/forward"
+            calendar_loc_to_geo_params = {
+                "access_key": "28cb994c15f9b6a59d1671a4d1e0461a",
+                "query": calendar_event["location"]
+            }
+            calendar_loc_to_geo_response = requests.get(calendar_loc_to_geo_api_url, params=calendar_loc_to_geo_params)
+            calendar_lat = calendar_loc_to_geo_response.json()["data"][0]["latitude"]
+            calendar_lon = calendar_loc_to_geo_response.json()["data"][0]["longitude"]
+            get_laur_url = f'http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat={calendar_lat}&lon={calendar_lon}&appid=09047bbead0c6a581c47bd8941a0b548'
+            laur_response = requests.get(get_laur_url)
+            vector = []
+            list_of_predictions = laur_response.json()["list"]
+
+            print(list_of_predictions)
+
+            item = (timestamp_to_hour_and_minutes(list_of_predictions[2]["dt"]), list_of_predictions[2]["main"]["aqi"])
+            vector.append(item)
+
+            item = (timestamp_to_hour_and_minutes(list_of_predictions[4]["dt"]), list_of_predictions[4]["main"]["aqi"])
+            vector.append(item)
+
+            item = (timestamp_to_hour_and_minutes(list_of_predictions[6]["dt"]), list_of_predictions[6]["main"]["aqi"])
+            vector.append(item)
+
+            item = (timestamp_to_hour_and_minutes(list_of_predictions[8]["dt"]), list_of_predictions[8]["main"]["aqi"])
+            vector.append(item)
+            reply = cel_mai_mic_indice_la_ora(vector)
+            return {"time": reply[0], "index": 6 - int(reply[1]), "keyword": activity}
+    return {"time": "12:00", "index": 5,  "keyword": "cioaca"}
 
 
 if __name__ == "__main__":

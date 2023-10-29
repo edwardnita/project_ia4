@@ -5,6 +5,7 @@ import './App.css';
 import Home from './pages/Home/Home';
 import Harta from './pages/Harta/Harta';
 import Cauta from './pages/Cauta/Cauta';
+import Chat from './pages/Chat/Chat';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/acasa" element={<Home />} />
           <Route path="/harta" element={<Harta />} />
           <Route path="/cauta" element={<Cauta />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </BrowserRouter>
     </div>
