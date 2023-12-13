@@ -5,6 +5,7 @@ import requests
 from googleapiclient.discovery import build
 from datetime import datetime, timedelta, timezone
 import json
+from pymongo import MongoClient
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -19,6 +20,11 @@ city = 'Bucuresti'
 country = 'Romania'
 location_lat = '44'
 location_lon = '26'
+
+client = MongoClient("mongodb+srv://ionescupv:OLRHv9RPXuwFRc5V@cluster0.9rq96wp.mongodb.net/")
+db = client["greenwave"]
+events_collection = db.get_collection("events")
+cursor = events_collection.find({})
 
 try:
     response = requests.get(ipstack_url)
@@ -194,12 +200,10 @@ homeInfo = {
 
 
 def generate(prompt):
-    if prompt.__contains__("plimbare"):
-        return "plimbare"
-    elif prompt.__contains__("mamaie"):
-        return "mers la tara"
-    elif prompt.__contains__("fotbal"):
-        return "fotbal"
+    for document in cursor:
+        if prompt.__contains__(document["keyword"]):
+            return document["event_name"]
+    return "nu facem nimik, stam linistiti"
 
 
 def timestamp_to_hour_and_minutes(timestamp):
